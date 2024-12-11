@@ -6,11 +6,15 @@ package_setup <- function(){
   
   #List of cran packages
   
-  cranp <- c("BiocManager", "vegan", "tidyverse")
+  cranp <- c("BiocManager", "vegan", "tidyverse", "knitr","rmarkdown", "usethis",
+             "fastqcr", "docopt", "DT", "pheatmap")
   
   #List of bioconductor packages
   
-  biocp <- c("iranges","systemPipeR","systemPipeRdata", "dada2", "biostrings")
+  biocp <- c("Rqc","QuasR","genomation", "GenomicRanges", "Gviz", "ggbio",
+             "systemPipeR","systemPipeRdata", "Rbowtie", "GenomicFeatures",
+             "DESeq2", "edgeR", "BiocStyle", "GO.db","dada2", "Biostrings",
+             "phyloseq")
   
   install_status <- list()
   #Install the cran packages
