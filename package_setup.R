@@ -1,15 +1,15 @@
 package_setup <- function(){
   
-  #Load the list of packages
+  #Generate a vector containing the list of installed packages
   
   listp <- installed.packages()[,1]
   
-  #List of cran packages
+  #List of CRAN packages used in Biol 4315
   
   cranp <- c("BiocManager", "vegan", "tidyverse", "knitr","rmarkdown", "usethis",
              "fastqcr", "docopt", "DT", "pheatmap")
   
-  #List of bioconductor packages
+  #List of bioconductor packages used in 4315
   
   biocp <- c("Rqc","QuasR","genomation", "GenomicRanges", "Gviz", "ggbio",
              "systemPipeR","systemPipeRdata", "Rbowtie", "GenomicFeatures",
