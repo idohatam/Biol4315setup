@@ -21,6 +21,8 @@ conda_dl <- function(){
   
   #download with curl and trycatch
   
+  message("Downloading Miniconda installer...")
+  
   tryCatch({
     
     curl::curl_download(url = URL, destfile = dest_file)
@@ -31,37 +33,52 @@ conda_dl <- function(){
     
     conda_install_statuss <- append(
       conda_install_statuss, paste("miniconda download failed with the error:", e$message))
-    
+    return(unlist(conda_install_status))  # Exit early with status
   })
   
   
   #install miniconda
   
+  message("Installing Miniconda...")
+  
   tryCatch({
     
-    system(paste("yes | bash", dest_file, sep = " "))
+    system(paste("bash", dest_file,"-b -p $HOME/miniconda3", sep = " "),
+           ignore.stdout = TRUE, ignore.stderr = TRUE)
+    
   }, error = function(e){
     
     conda_install_statuss <- append(
       conda_install_statuss, paste("Conda installation failed with error:", e$message))
+    return(unlist(conda_install_statuss)) #Exit early with status
   })
   
   
-  #check the conda is installed
+  message("Setting up PATH for Miniconda...")
   
-  if(Sys.which("conda")==""){
-    #set path
-    system(
-      "echo 'export PATH=\"$HOME/miniconda3/bin:$PATH\"' >> ~/.bash_profile")
+  shell_profile <- ifelse(Sys.getenv("SHELL") == "/bin/zsh", "~/.zshrc", "~/.bash_profile")
+  
+  tryCatch({
+    system(sprintf("echo 'export PATH=\"$HOME/miniconda3/bin:$PATH\"' >> %s", shell_profile))
+    system(sprintf("source %s", shell_profile))  # Automatically source the profile
+  }, error = function(e) {
+    warning("Failed to update PATH.")
+    conda_install_status <- append(conda_install_statuss, paste("Failed to set PATH for conda"))
+    return(unlist(conda_install_status))  # Exit early with status
+  })
+  
+  
+  #varifying conda installation
+  
+  if(nchar(Sys.which("conda")) > 0){
+    conda_install_statuss <- append(conda_install_statuss, 
+                                    paste("Conda installed and configured successfully"))
+    message("Miniconda installed and configured successfully!")
+  } else {
     
-    #source the bash_profile
-    
-    system("source ~/.bash_profile")
-    
-    conda_install_statuss <- append(
-      conda_install_statuss, paste("Path to conda installation was set"))
-    #check that the path was set properly
-  }
+    conda_install_statuss <- append(conda_install_statuss, paste("Faild varifying PATH for conda"))
+    warning("Miniconda installation complete, but 'conda' is not in your PATH.")
+  } 
   
   
 
