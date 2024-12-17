@@ -1,5 +1,5 @@
 
-condat_update <- function(){
+conda_update <- function(){
 
   conda_update_status <- list()
   
