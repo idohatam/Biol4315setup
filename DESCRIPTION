@@ -1,0 +1,17 @@
+Package: Biol4315setup
+Title: Seting up the computational environment for Biol 4315 nucleic acid
+    omics
+Version: 0.0.0.9000
+Authors@R: 
+    person("Ido", "Hatam", , "ihatam@langara.ca", role = c("aut", "cre"))
+Description: A package to streamline the setup of all the nessary R
+    packages, conda and conda packages for the successful completion of
+    Biol 4315 lab
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    BiocManager,
+    curl,
+    devtools
