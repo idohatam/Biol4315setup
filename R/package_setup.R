@@ -1,3 +1,19 @@
+#' @title Install Required R Packages
+#'
+#' @description This function checks for the presence of required R packages 
+#' and installs any that are missing. It ensures all necessary packages for 
+#' the course are available in the R environment.
+#'
+#' @details The function uses a predefined list of required packages. It compares 
+#' this list against the installed packages in the R environment. Missing packages 
+#' are installed via `install.packages`. If a package installation fails, the 
+#' failure is logged in the returned report, but the function continues attempting 
+#' to install the remaining packages. The package does not reinstall or update packages that are already installed.
+#'
+#' @return A character vector containing the status of each package installation. 
+#' For each package, the vector indicates whether it was already installed, 
+#' successfully installed, or if the installation failed.
+
 package_setup <- function(){
   
   #Generate a vector containing the list of installed packages

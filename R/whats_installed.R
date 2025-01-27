@@ -1,5 +1,26 @@
-#A wrapper function that runs through the entire workflow from downloading and installing conda
-#to 3rd party software and R package installation.
+#' @title Conda Workflow Setup
+#'
+#' @description This wrapper function orchestrates the entire setup workflow for your project.
+#' It downloads and installs Miniconda (if needed), configures Conda channels, updates Conda packages,
+#' installs third-party tools, and installs required R packages. 
+#' Note that this will only work on Mac computers with Intel silicone
+#'
+#' @return A list summarizing the status of each step in the setup workflow.
+#' Each entry in the list contains a status message indicating success or failure.
+#'
+#' @details If any critical step fails (e.g., Conda installation or channel setup), 
+#' the function will terminate and print the corresponding error message. 
+#' Non-critical failures (such as failed R package installations) will trigger warnings, 
+#' but the workflow will continue. Note that the function does not take any arguments and 
+#' internally runs a series of helper functions to complete the setup process. 
+#'
+#' @examples {
+#'   # Run the full setup workflow
+#'   report <- conda_whats_installed()
+#'   print(report)
+#' }
+#' 
+#' @export
 
 conda_whats_installed <- function(){
   #set up a list for report

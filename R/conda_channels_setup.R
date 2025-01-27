@@ -1,4 +1,24 @@
-#Function that checks if the channels are set
+#' @title Configure Conda Channels
+#'
+#' @description This function ensures that the required Conda channels 
+#' (`defaults`, `conda-forge`, and `bioconda`) are properly configured 
+#' and sets the channel priority to `strict`.
+#'
+#' @details The function checks if the required Conda channels are already 
+#' configured in the user's environment. If a channel is missing, it is added 
+#' to the configuration. Additionally, the function verifies that the 
+#' channel priority is set to `strict` for reliable package resolution. 
+#' A status report is returned to indicate the success or failure of each step.
+#'
+#' Note that this function is an internal helper function used by the wrapper function.
+#' Therefore it assumes Conda is already installed and available in the system's PATH. 
+#' Any errors during channel configuration will be captured and reported in the status report.
+#'
+#' @return A character vector containing the status of each step, including 
+#' whether channels were added or if they were already configured, and 
+#' whether the channel priority was successfully set to `strict`.
+#'
+
 conda_channels_setup <- function(){
   
   

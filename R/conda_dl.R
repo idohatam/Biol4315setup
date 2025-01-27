@@ -1,4 +1,22 @@
-# a function that downloads and installs miniconda
+#' @title Download and Install Miniconda
+#'
+#' @description This function  downloads and installs Miniconda, note that it is hard coded to only download the Intel MacOSX installation package.
+#'
+#' @details The function first checks if Conda is already installed. If it is, it 
+#' will return a message indicating that Conda is already installed and set up. If Conda 
+#' is not installed, it will proceed to download and install Miniconda. The installation 
+#' process is done via a bash script, and any errors during the download or installation 
+#' will be captured and reported. After the installation, the function also ensures that 
+#' the Conda path is correctly set in the system's environment.
+#'
+#' The function will return a status report as a character vector, which will indicate 
+#' the success or failure of each step in the process.
+#'
+#' @return A character vector with the status of each step in the process, including 
+#' any error messages encountered during the download, installation, or path setup.
+#'
+
+
 conda_dl <- function(){
   
   #download address
@@ -63,7 +81,7 @@ conda_dl <- function(){
     system(sprintf("source %s", shell_profile))  # Automatically source the profile
   }, error = function(e) {
     warning("Failed to update PATH.")
-    conda_install_status <- append(conda_install_statuss, paste("Failed to set PATH for conda"))
+    conda_install_statuss <- append(conda_install_statuss, paste("Failed to set PATH for conda"))
     return(unlist(conda_install_status))  # Exit early with status
   })
   
