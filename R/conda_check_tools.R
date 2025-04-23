@@ -40,7 +40,7 @@ conda_check_tools <- function(){
           system2("conda", args = c("install", "-y", tool))
         } else {
           # Install other tools with mamba
-          system2("mamba", args = c("install", "-y", tool))
+          system2("conda", args = c("install", "-y", tool))
         }
         tools_status <- append(tools_status, paste0(tool, " was installed successfully."))
       }, error = function(e) {
