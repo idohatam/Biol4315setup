@@ -86,19 +86,29 @@ conda_dl <- function(){
   })
   
   
-  #varifying conda installation
-  
-  if(nchar(Sys.which("conda")) > 0){
-    conda_install_statuss <- append(conda_install_statuss, 
-                                    paste("Conda installed and configured successfully"))
+  # Final PATH verification
+  if (nchar(Sys.which("conda")) > 0) {
+    conda_install_statuss <- append(conda_install_statuss, "Conda installed and configured successfully")
     message("Miniconda installed and configured successfully!")
   } else {
+    default_conda <- "~/miniconda3/bin"
+    conda_path <- file.path(path.expand(default_conda), "conda")
     
-    conda_install_statuss <- append(conda_install_statuss, paste("Faild varifying PATH for conda"))
-    warning("Miniconda installation complete, but 'conda' is not in your PATH.")
-  } 
+    if (file.exists(conda_path)) {
+      Sys.setenv(PATH = paste(path.expand(default_conda), Sys.getenv("PATH"), sep = ":"))
+      
+      if (nchar(Sys.which("conda")) > 0) {
+        conda_install_statuss <- append(conda_install_statuss, "Conda path manually updated and confirmed")
+        message("Miniconda installed and configured successfully after manual path update!")
+      } else {
+        warning("Conda found but still not accessible after updating PATH.")
+        conda_install_statuss <- append(conda_install_statuss, "Conda found but still not accessible from R")
+      }
+    } else {
+      warning("Miniconda installation complete, but 'conda' is not in your PATH.")
+      conda_install_statuss <- append(conda_install_statuss, "Failed verifying PATH for conda")
+    }
+  }
   
-  
-
   return(unlist(conda_install_statuss))
 }
