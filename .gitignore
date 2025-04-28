@@ -7,3 +7,4 @@ requierd.R
 Packaging guide.Rmd
 *.Rproj
 R2/
+.DS_Store
