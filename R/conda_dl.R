@@ -19,9 +19,25 @@
 
 conda_dl <- function(){
   
-  #download address
+  #check if the computer is an Intel Mac or an Apple silicon Mac
+  info <- which(grepl("Apple M",system2("system_profiler", 
+                                        args = "SPHardwareDataType", 
+                                        stdout = TRUE)))
+  if(length(info) == 0){
+  
+  #download address for intel
   
   URL <- "https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh"
+  message("Intel Mac detected. Using x86_64 installer.")
+  
+  }else{
+    
+    #download address for the M series
+    URL <-"https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh"
+    message("Apple Silicon Mac detected. Using ARM installer.")
+  }
+  
+  
   
   dest_file <- "Miniconda3.sh"
   
