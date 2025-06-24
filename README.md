@@ -3,7 +3,7 @@
 The `Biol4315setup` package automates the setup of the computational environment for Langara's Biol 4315 *Nucleic Acid Omics* course.  
 It ensures that students have all required **third-party tools, R packages, and Miniconda** properly configured on the **T450 Mac lab computers**.  
 
-**⚠️ Important:** This package is designed _specifically_ for **MacOS** and will **not work on other computers.**  
+**⚠️ Important:** This package is designed _specifically_ for **MacOS** and will **not work on computers with other Operating Systems.**  
 
 ---
 
