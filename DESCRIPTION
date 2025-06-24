@@ -1,7 +1,7 @@
 Package: Biol4315setup
 Title: Seting up the computational environment for Biol 4315 nucleic acid
     omics
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Ido", "Hatam", , "ihatam@langara.ca", role = c("aut", "cre"))
 Description: A package to streamline the setup of all the nessary R
