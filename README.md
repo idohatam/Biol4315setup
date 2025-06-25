@@ -85,9 +85,14 @@ conda activate
 - If `conda activate` doesn't work, you may need to **initialize Conda first**:  
 
 ```bash
-conda init
+conda init zsh
+source ~/.zshrc
 conda activate
 ```
+
+`source` will restart your terminal after `conda init`
+
+>**NOTE:** it is possible that your mac isn't runnig zsh shell and require replaceing zsh with bash
 
 ---
 
@@ -110,33 +115,42 @@ conda install flye
 ## **Bonus: Using Virtual Environments for Tools**  
 
 Conda allows you to create **separate virtual environments** for different tools.  
-This is useful to **avoid dependency conflicts** and keep installations clean.  
+This is useful to **avoid dependency conflicts** and keep installations clean.
+An example for this is the long read assembler `flye` which currently supports python versions 3.9 - 3.12.
 
 ### **Step 1: Create an Environment for a Specific Tool**  
 
-To install Flye inside its own virtual environment named `fly`, run:  
+To install `flye` inside its own virtual environment named `flye-env`, run:  
 
 ```bash
-conda create -n fly flye
+
+conda create -n flye-env python=3.10 -c conda-forge
+conda activate flye-env
+conda install flye=2.9.6 -c bioconda
+
 ```
 
-- `-n fly` → Names the environment `fly`.  
-- `flye` → Installs Flye inside that environment.  
+- `-n` → Names the environment `flye -env`.  
+- `python=3.10` → Installs `python` version 3.10.
+- `-c` → Specifies which channel to use
+- `flye=2.9.6` → specifies which version of flye to install
+
+Next run `flye -h` to make sure that flye was installed properly.
 
 ---
 
-### **Step 2: Activate and Deactivate the Environment**  
+### **Step 2: Deactivate and reactivate the Environment**  
 
-To **activate** the `fly` environment:  
-
-```bash
-conda activate fly
-```
-
-To **deactivate** and return to the base environment:  
+To **Deactivate** the `flye-env` environment:  
 
 ```bash
 conda deactivate
+```
+
+To **reactivate** and return to the base environment:  
+
+```bash
+conda activate flye-env
 ```
 
 This method helps keep tools isolated and ensures no conflicts between dependencies.  
